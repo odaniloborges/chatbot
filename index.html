@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Chat com Gemini Pro</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+</head>
+<body>
+  <h1>Chat com Gemini Pro</h1>
+
+  <p>Digite seu prompt e clique em "Enviar":</p>
+
+  <textarea id="prompt" rows="5" cols="50"></textarea>
+  <br>
+  <button onclick="enviarPrompt()">Enviar</button>
+
+  <div id="resultados">
+    <h2>Resultados:</h2>
+    <p id="output"></p>
+  </div>
+
+  <script>
+    function enviarPrompt() {
+      var prompt = document.getElementById("prompt").value;
+      document.getElementById("output").innerHTML = "Processando...";
+
+      // Fazer a requisição para o servidor
+      $.ajax({
+        url: '/processar_prompt', // Substitua por sua URL do servidor
+        method: 'POST',
+        data: { prompt: prompt },
+        success: function(resposta) {
+          document.getElementById("output").innerHTML = resposta;
+        },
+        error: function(erro) {
+          console.error("Erro ao enviar o prompt:", erro);
+          document.getElementById("output").innerHTML = "Erro ao processar o prompt.";
+        }
+      });
+
+      document.getElementById("prompt").value = ""; // Limpar o campo de entrada
+    }
+  </script>
+</body>
+</html>
