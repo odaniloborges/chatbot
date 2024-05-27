@@ -25,7 +25,7 @@
 
       // Fazer a requisição para o servidor
       $.ajax({
-        url: '/processar_prompt', // Substitua por sua URL do servidor
+        url: 'http://127.0.0.1:5000/processar_prompt', // Substitua por sua URL do servidor
         method: 'POST',
         data: { prompt: prompt },
         success: function(resposta) {
